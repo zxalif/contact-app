@@ -1,3 +1,5 @@
+{% load static %}
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -7,12 +9,23 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'contacts/css/customs.css' %}">
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <script data-require="ui-router@*" data-semver="0.2.13" src="https://rawgit.com/angular-ui/ui-router/0.2.13/release/angular-ui-router.js"></script>
-
+    <script src="{% static 'contacts/app.js' %}"></script>
+    <script src="{% static 'contacts/routes/contact-app-routes.js' %}"></script>
+    <script src="{% static 'contacts/controllers/contact-app-controller.js' %}"></script>
     <title>Contact App!</title>
   </head>
   <body>
       <h1 class="text-center">Welcome to contact web app!</h1>
+
+      <div ng-app="contactApp" class="container">
+          <div ui-view>
+
+          </div>
+      </div>
+
   </body>
 </html>

@@ -1,0 +1,14 @@
+.form-input{
+    border: 1px solid #000;
+    outline: none;
+    border-radius: 0;
+}
+
+.form-input:focus, .form-input:hover{
+    border: 2px solid #000;
+    outline: none;
+}
+
+.btn{
+    border-radius: 0;
+}
