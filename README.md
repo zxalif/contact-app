@@ -9,6 +9,7 @@ A simmple application for store peoples names!
 - Run The App
 - Application
 - Admin Panel
+- Test App
 
 #### Clone
 
@@ -94,3 +95,18 @@ Superuser created successfully.
 ```
 
 Now, go to ```127.0.0.0:8000/admin/``` and fill the login user name and password.
+
+#### Test App
+
+To run the test run the following ```command```. That will run the test for django.
+```bash
+$ python3 manage.py test
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.......
+----------------------------------------------------------------------
+Ran 7 tests in 0.028s
+
+OK
+Destroying test database for alias 'default'...
+```
