@@ -98,7 +98,7 @@ Now, go to ```127.0.0.0:8000/admin/``` and fill the login user name and password
 
 #### Test App
 
-To run the test run the following ```command```. That will run the test for django.
+To run the test run the following ```command```. That will run the test for api & views.
 ```bash
 $ python3 manage.py test
 Creating test database for alias 'default'...
