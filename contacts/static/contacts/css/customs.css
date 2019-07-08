@@ -12,3 +12,16 @@
 .btn{
     border-radius: 0;
 }
+
+.hide{
+    display: none;
+}
+
+.show{
+    display: block;
+}
+
+div.scroll {
+    height: 400px;
+    overflow-y: scroll;
+  }

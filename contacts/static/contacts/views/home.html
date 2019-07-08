@@ -2,27 +2,12 @@
     <div class="col-md-6 row p-3">
         <div class="card col-md-12" style="width: 18rem;">
             <div class="card-body">
-              <h5 class="card-title">Contacts</h5>
-              <p class="card-text">
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <input ng-model="query" class="form-control form-input" type="text">
-                    </li>
-                    <li style="cursor: pointer;" ng-click="selected(contact)" class="list-group-item cursor" ng-repeat="contact in contacts | orderBy:'contact_name' | filter:query">{{ contact.contact_name }}</li>
-                  </ul>
-              </p>
-            </div>
-          </div>
-    </div>
-    <div class="col-md-6 row p-3">
-        <div class="card col-md-12" style="width: 18rem;">
-            <div class="card-body">
               <h5 class="card-title">Contact Form</h5>
               <p class="card-text">
                 <ul class="list-group">
                     <form id="contact-data" method="post">
                         <li class="list-group-item">
-                            <input ng-model="form.contact_id" placeholder="ID" number-only class="form-control form-input" type="text">
+                            <input only-number id="contact_id" ng-model="form.contact_id" placeholder="ID" number-only class="form-control form-input" type="text">
                         </li>
                         <li class="list-group-item">
                             <input ng-model="form.contact_name" placeholder="Name" class="form-control form-input" type="text">
@@ -30,10 +15,39 @@
                     </form>
                   </ul>
               </p>
-              <button ng-click="submit()" class="card-link btn btn-secondary btn-sm">Submit</button>
-              <button style="display: none" class="card-link btn btn-secondary btn-sm">Remove</button>
-              <button style="display: none" class="card-link btn btn-secondary btn-sm">Update</button>
+              <button id="create" ng-click="submit()" class="card-link btn btn-secondary btn-sm show">Create</button>
+              <button id="update" ng-click="update()" class="card-link btn btn-secondary btn-sm hide">Update</button>
+              <button id="cancel" ng-click="cancel()" class="card-link btn btn-secondary btn-sm hide">Cancel</button>
+              <p class="text-center">
+                  {{ message }}
+              </p>
             </div>
           </div>
     </div>
+    <div class="col-md-6 row p-3">
+        <div class="card col-md-12 scroll" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Contacts</h5>
+              <p class="card-text">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input ng-model="query" class="form-control form-input" type="text">
+                    </li>
+                    <li class="list-group-item" ng-repeat="contact in contacts | orderBy:'contact_name' | filter:query">
+                      {{ contact.contact_name }} 
+                      <span style="float:right;">
+                          <i style="cursor: pointer;" ng-click="delete(contact)" class="fa fa-trash"></i>
+                          <i style="cursor: pointer;" ng-click="selected(contact)" class="fa fa-edit"></i>
+                      </span>
+                    </li>
+                  </ul>
+              </p>
+            </div>
+          </div>
+    </div>
+</div>
+
+<a class="btn btn-secondary btn-lg active" ui-sref=".about">Summary</a>
+<div ui-view>
+  
 </div>
