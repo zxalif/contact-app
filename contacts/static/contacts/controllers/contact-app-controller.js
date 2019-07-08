@@ -33,10 +33,12 @@ app.controller('homeController', function($scope, $http, dataManager){
             data: $.param($scope.form),
             headers : {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}
         }).success(function(data, status, headers, config){
+            $scope.contacts.push(data);
             $scope.message = 'Successfully created the contact!';
         }).error(function(data, status, headers, config){
             $scope.message = 'Failed to created new contact!';
-        });}
+        });
+    };
 
     $scope.delete = function(contact){
         var index = $scope.contacts.indexOf(contact)
