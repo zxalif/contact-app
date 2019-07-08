@@ -1,4 +1,4 @@
-app.controller('homeController', function($scope, $http){
+app.controller('homeController', function($scope, $http, dataManager){
     /* initialize form variable */
     $scope.form = {};
     $scope.contacts = new Array();
@@ -56,7 +56,7 @@ app.controller('homeController', function($scope, $http){
         $scope.form.contact_id = null;
         $scope.form.contact_name = null;
         $('#contact_id').show();
-        $('#create').show();
+        $('#create').show();scope
         $('#update').hide();
         $('#cancel').hide();
     }
@@ -76,8 +76,17 @@ app.controller('homeController', function($scope, $http){
             $scope.message = 'Fail to update data!';
         });
     };
+
+    dataManager.getNumberOfData = function(){
+        if($scope.contacts.length > 0){
+            dataManager.sample.contact_id = $scope.contacts[$scope.contacts.length-1].contact_id;
+            dataManager.sample.contact_name = $scope.contacts[$scope.contacts.length-1].contact_name;
+        }
+        return $scope.contacts.length;
+    }
 });
 
-app.controller('aboutController', function($scope){
-    $scope.numberOfTotalContact = 100;
+app.controller('aboutController', function($scope, dataManager){
+    $scope.numberOfTotalContact = dataManager.getNumberOfData();
+    $scope.sample = dataManager.sample;
 });
