@@ -21,8 +21,6 @@ class ContactListView(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        print(request.data)
-        print(request.data)
         serializer = ContactSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
