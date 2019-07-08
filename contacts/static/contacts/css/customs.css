@@ -24,4 +24,12 @@
 div.scroll {
     height: 400px;
     overflow-y: scroll;
-  }
+}
+
+.text-right{
+    float: right;
+}
+
+.pointer{
+    cursor: pointer;
+}

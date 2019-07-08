@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-6 row p-3">
-        <div class="card col-md-12" style="width: 18rem;">
+        <div class="card col-md-12" >
             <div class="card-body">
               <h5 class="card-title">Contact Form</h5>
               <p class="card-text">
@@ -25,7 +25,7 @@
           </div>
     </div>
     <div class="col-md-6 row p-3">
-        <div class="card col-md-12 scroll" style="width: 18rem;">
+        <div class="card col-md-12 scroll">
             <div class="card-body">
               <h5 class="card-title">Contacts</h5>
               <p class="card-text">
@@ -35,9 +35,9 @@
                     </li>
                     <li class="list-group-item" ng-repeat="contact in contacts | orderBy:'contact_name' | filter:query">
                       {{ contact.contact_name }} 
-                      <span style="float:right;">
-                          <i style="cursor: pointer;" ng-click="delete(contact)" class="fa fa-trash"></i>
-                          <i style="cursor: pointer;" ng-click="selected(contact)" class="fa fa-edit"></i>
+                      <span class="text-right">
+                          <i ng-click="delete(contact)" class="fa fa-trash pointer"></i>
+                          <i ng-click="selected(contact)" class="fa fa-edit pointer"></i>
                       </span>
                     </li>
                   </ul>
