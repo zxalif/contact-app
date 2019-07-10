@@ -39,7 +39,6 @@
                     <li class="list-group-item">
                         <input placeholder="Search query..." ng-model="query.$" class="form-control form-input" type="text">
                     </li>
-
                     <li class="list-group-item">
                       <table class="table table-bordered">
                         <thead>
@@ -52,7 +51,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr ng-repeat="contact in contacts | byName:'contact_name' | filter:query">
+                          <tr ng-repeat="contact in contacts = (dataManager.contacts | byName:'contact_name') | filter:query ">
                             <td>{{ contact.contact_name }}</td>
                             <td>{{ contact.contact_phone }}</td>
                             <td>{{ contact.contact_email }}</td>
@@ -67,16 +66,9 @@
                         </tbody>
                       </table>
                     </li>
-
-                    
                   </ul>
               </p>
             </div>
           </div>
     </div>
-</div>
-
-
-<div ui-view>
-  
 </div>

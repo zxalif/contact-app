@@ -1,7 +1,7 @@
 app.controller('homeController', function($scope, $http, dataManager){
     /* initialize form variable */
     $scope.form = {};
-    $scope.contacts = new Array();
+    $scope.dataManager = dataManager;
 
     /* Visibility Setup */
     $scope.createButton = true;
@@ -14,14 +14,14 @@ app.controller('homeController', function($scope, $http, dataManager){
         headers: {'Content-type': 'application/json'},
         method: 'GET'
     }).success(function(data, status, headers, config){
-        $scope.contacts =  data;
+        $scope.dataManager.contacts =  data;
     }).error(function(data, status, headers, config){
-        $scope.contacts = new Array();
+        $scope.dataManager.contacts = new Array();
     });
 
     /* select a contact */
     $scope.selected = function(contact){
-        let select = $scope.contacts.filter(c => c.id == contact.id)[0];
+        let select = $scope.dataManager.contacts.filter(c => c.id == contact.id)[0];
 
         $scope.createButton = false;
         $scope.updateButton = true;
@@ -42,7 +42,7 @@ app.controller('homeController', function($scope, $http, dataManager){
             method: 'POST',
             data: $scope.form,
         }).success(function(data, status, headers, config){
-            $scope.contacts.push(data);
+            $scope.dataManager.contacts.push(data);
             $scope.message = 'Successfully created the contact!';
             $scope.form = {};
         }).error(function(data, status, headers, config){
@@ -51,8 +51,8 @@ app.controller('homeController', function($scope, $http, dataManager){
     };
 
     $scope.delete = function(contact){
-        var index = $scope.contacts.indexOf(contact)
-        $scope.contacts.splice(index, 1);
+        var index = $scope.dataManager.contacts.indexOf(contact)
+        $scope.dataManager.contacts.splice(index, 1);
         $http({
             'url': 'api/v1/contacts/' + contact.id + '/',
             method: 'DELETE',
@@ -64,7 +64,7 @@ app.controller('homeController', function($scope, $http, dataManager){
             };
         }).error(function(data, status, headers, config){
             $scope.message = 'Faild to delete the data deleted the contact!';
-        });   
+        });
     };
 
     $scope.cancel = function(){
@@ -82,23 +82,23 @@ app.controller('homeController', function($scope, $http, dataManager){
             headers : {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}
         }).success(function(data, status, headers, config){
             $scope.message = 'Successfully updated data';
-            var index = $scope.contacts.indexOf($scope.contacts.filter(c => c.id == $scope.form.id)[0]);
-            $scope.contacts.splice(index, 1);
-            $scope.contacts.push(data);
+            var index = $scope.dataManager.contacts.indexOf($scope.dataManager.contacts.filter(c => c.id == $scope.form.id)[0]);
+            $scope.dataManager.contacts.splice(index, 1);
+            $scope.dataManager.contacts.push(data);
         }).error(function(data, status, headers, config){
             $scope.message = 'Fail to update data!';
         });
     };
 
     dataManager.getNumberOfData = function(){
-        if($scope.contacts.length > 0){
-            dataManager.sample.id = $scope.contacts[$scope.contacts.length-1].id;
-            dataManager.sample.contact_name = $scope.contacts[$scope.contacts.length-1].contact_name;
+        if($scope.dataManager.contacts.length > 0){
+            dataManager.sample.id = $scope.dataManager.contacts[$scope.dataManager.contacts.length-1].id;
+            dataManager.sample.contact_name = $scope.dataManager.contacts[$scope.dataManager.contacts.length-1].contact_name;
         }
-        return $scope.contacts.length;
+        return $scope.dataManager.contacts.length;
     }
 });
 
 app.controller('jsonController', function($scope, dataManager){
-    $scope.contacts = dataManager.contacts;
+    $scope.dataManager = dataManager;
 });

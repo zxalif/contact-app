@@ -18,5 +18,5 @@ app.filter('byName', function(){
             i = i + 1;
         }
         return sortedArray;
-    }
+    };
 });
