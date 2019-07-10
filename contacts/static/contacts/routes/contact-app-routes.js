@@ -7,9 +7,9 @@ app.config(function($stateProvider, $urlRouterProvider){
             templateUrl: '/static/contacts/views/home.html',
             controller: 'homeController'
         })
-        .state('home.about', {
-            url: '/about',
-            templateUrl: '/static/contacts/views/about.html',
-            controller: 'aboutController'
+        .state('json', {
+            url: '/json',
+            templateUrl: '/static/contacts/views/json.html',
+            controller: 'jsonController'
         });
 });

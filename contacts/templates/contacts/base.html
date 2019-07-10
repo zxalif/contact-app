@@ -18,13 +18,15 @@
     <script src="{% static 'contacts/routes/contact-app-routes.js' %}"></script>
     <script src="{% static 'contacts/services/service.js' %}"></script>
     <script src="{% static 'contacts/directives/directive.js' %}"></script>
+    <script src="{% static 'contacts/filters/filter.js' %}"></script>
     <script src="{% static 'contacts/controllers/contact-app-controller.js' %}"></script>
     <title>Contact App!</title>
   </head>
-  <body>
-      <h1 class="text-center">Welcome to contact web app!</h1>
+  <body ng-app="contactApp" >
+      <h1 class="text-center">Welcome to contact web app! <a class="link" ui-sref='json'>Json</a></h1>
 
-      <div ng-app="contactApp" class="container">
+      <div class="container">
+          
           <div ui-view>
 
           </div>

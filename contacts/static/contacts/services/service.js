@@ -1,3 +1,5 @@
 app.service('dataManager', function(){
-    this.sample = {};
+    return {
+        contacts: {}
+    }
 });

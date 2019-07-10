@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-6 row p-3">
+    <div class="col-md-4 row p-3">
         <div class="card col-md-12" >
             <div class="card-body">
               <h5 class="card-title">Contact Form</h5>
@@ -7,39 +7,68 @@
                 <ul class="list-group">
                     <form id="contact-data" method="post">
                         <li class="list-group-item">
-                            <input only-number id="contact_id" ng-model="form.contact_id" placeholder="ID" number-only class="form-control form-input" type="text">
+                            <input ng-model="form.contact_name" placeholder="Name" class="form-control form-input" type="text">
                         </li>
                         <li class="list-group-item">
-                            <input ng-model="form.contact_name" placeholder="Name" class="form-control form-input" type="text">
+                          <input maxlength="10" number-only ng-model="form.contact_phone" placeholder="1796234923" class="form-control form-input" type="text">
+                      </li>
+                      <li class="list-group-item">
+                        <input ng-model="form.contact_email" placeholder="example@example.com" class="form-control form-input" type="email">
+                      </li>
+                      <li class="list-group-item">
+                          <input ng-model="form.contact_address" placeholder="3/a Dhanmondi" class="form-control form-input" type="text">
                         </li>
                     </form>
                   </ul>
               </p>
-              <button id="create" ng-click="submit()" class="card-link btn btn-secondary btn-sm show">Create</button>
-              <button id="update" ng-click="update()" class="card-link btn btn-secondary btn-sm hide">Update</button>
-              <button id="cancel" ng-click="cancel()" class="card-link btn btn-secondary btn-sm hide">Cancel</button>
+              <button id="create" ng-click="submit()" ng-show="createButton" class="card-link btn btn-secondary btn-sm">Create</button>
+              <button id="update" ng-click="update()" ng-show="updateButton" class="card-link btn btn-secondary btn-sm">Update</button>
+              <button id="cancel" ng-click="cancel()" ng-show="cancelButton" class="card-link btn btn-secondary btn-sm">Cancel</button>
               <p class="text-center">
                   {{ message }}
               </p>
             </div>
           </div>
     </div>
-    <div class="col-md-6 row p-3">
+    <div class="col-md-8 row p-3">
         <div class="card col-md-12 scroll">
             <div class="card-body">
               <h5 class="card-title">Contacts</h5>
               <p class="card-text">
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <input ng-model="query" class="form-control form-input" type="text">
+                        <input placeholder="Search query..." ng-model="query.$" class="form-control form-input" type="text">
                     </li>
-                    <li class="list-group-item" ng-repeat="contact in contacts | orderBy:'contact_name' | filter:query">
-                      {{ contact.contact_name }} 
-                      <span class="text-right">
-                          <i ng-click="delete(contact)" class="fa fa-trash pointer"></i>
-                          <i ng-click="selected(contact)" class="fa fa-edit pointer"></i>
-                      </span>
+
+                    <li class="list-group-item">
+                      <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr ng-repeat="contact in contacts | byName:'contact_name' | filter:query">
+                            <td>{{ contact.contact_name }}</td>
+                            <td>{{ contact.contact_phone }}</td>
+                            <td>{{ contact.contact_email }}</td>
+                            <td>{{ contact.contact_address }}</td>
+                            <td>
+                              <span class="text-right">
+                                <i ng-click="delete(contact)" class="fa fa-trash pointer"></i>
+                                <i ng-click="selected(contact)" class="fa fa-edit pointer"></i>
+                            </span>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </li>
+
+                    
                   </ul>
               </p>
             </div>
@@ -47,7 +76,7 @@
     </div>
 </div>
 
-<a class="btn btn-secondary btn-lg active" ui-sref=".about">Summary</a>
+
 <div ui-view>
   
 </div>

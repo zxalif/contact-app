@@ -3,6 +3,11 @@ app.controller('homeController', function($scope, $http, dataManager){
     $scope.form = {};
     $scope.contacts = new Array();
 
+    /* Visibility Setup */
+    $scope.createButton = true;
+    $scope.updateButton = false;
+    $scope.cancelButton = false;
+
     /* GET ALL CONTACT LIST */
     $http({
         url: '/api/v1/contacts/',
@@ -16,25 +21,30 @@ app.controller('homeController', function($scope, $http, dataManager){
 
     /* select a contact */
     $scope.selected = function(contact){
-        let select = $scope.contacts.filter(c => c.contact_id == contact.contact_id)[0];
-        $('#contact_id').hide();
-        $('#create').hide();
-        $('#update').show();
-        $('#cancel').show();
+        let select = $scope.contacts.filter(c => c.id == contact.id)[0];
 
-        $scope.form.contact_id = select.contact_id;
+        $scope.createButton = false;
+        $scope.updateButton = true;
+        $scope.cancelButton = true;
+
+        $scope.message = null;
+
+        $scope.form.id = select.id;
         $scope.form.contact_name = select.contact_name;
+        $scope.form.contact_phone = select.contact_phone;
+        $scope.form.contact_email = select.contact_email;
+        $scope.form.contact_address = select.contact_address;
     };
 
     $scope.submit = function(){
         $http({
             url: '/api/v1/contacts/',
             method: 'POST',
-            data: $.param($scope.form),
-            headers : {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}
+            data: $scope.form,
         }).success(function(data, status, headers, config){
             $scope.contacts.push(data);
             $scope.message = 'Successfully created the contact!';
+            $scope.form = {};
         }).error(function(data, status, headers, config){
             $scope.message = 'Failed to created new contact!';
         });
@@ -44,34 +54,35 @@ app.controller('homeController', function($scope, $http, dataManager){
         var index = $scope.contacts.indexOf(contact)
         $scope.contacts.splice(index, 1);
         $http({
-            'url': 'api/v1/contacts/' + contact.contact_id + '/',
+            'url': 'api/v1/contacts/' + contact.id + '/',
             method: 'DELETE',
             headers : {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}
         }).success(function(data, status, headers, config){
             $scope.message = 'Successfully deleted the contact!';
+            if($scope.form.id && $scope.form.id == contact.id){
+                $scope.form = {};
+            };
         }).error(function(data, status, headers, config){
             $scope.message = 'Faild to delete the data deleted the contact!';
         });   
     };
 
     $scope.cancel = function(){
-        $scope.form.contact_id = null;
-        $scope.form.contact_name = null;
-        $('#contact_id').show();
-        $('#create').show();
-        $('#update').hide();
-        $('#cancel').hide();
+        $scope.form = {};
+        $scope.createButton = true;
+        $scope.updateButton = false;
+        $scope.cancelButton = false;
     }
 
     $scope.update = function(){
         $http({
-            'url': 'api/v1/contacts/' + $scope.form.contact_id + '/',
+            'url': 'api/v1/contacts/' + $scope.form.id + '/',
             method: 'PUT',
             data: $.param($scope.form),
             headers : {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}
         }).success(function(data, status, headers, config){
             $scope.message = 'Successfully updated data';
-            var index = $scope.contacts.indexOf($scope.contacts.filter(c => c.contact_id == $scope.form.contact_id)[0]);
+            var index = $scope.contacts.indexOf($scope.contacts.filter(c => c.id == $scope.form.id)[0]);
             $scope.contacts.splice(index, 1);
             $scope.contacts.push(data);
         }).error(function(data, status, headers, config){
@@ -81,14 +92,13 @@ app.controller('homeController', function($scope, $http, dataManager){
 
     dataManager.getNumberOfData = function(){
         if($scope.contacts.length > 0){
-            dataManager.sample.contact_id = $scope.contacts[$scope.contacts.length-1].contact_id;
+            dataManager.sample.id = $scope.contacts[$scope.contacts.length-1].id;
             dataManager.sample.contact_name = $scope.contacts[$scope.contacts.length-1].contact_name;
         }
         return $scope.contacts.length;
     }
 });
 
-app.controller('aboutController', function($scope, dataManager){
-    $scope.numberOfTotalContact = dataManager.getNumberOfData();
-    $scope.sample = dataManager.sample;
+app.controller('jsonController', function($scope, dataManager){
+    $scope.contacts = dataManager.contacts;
 });

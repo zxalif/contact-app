@@ -13,14 +13,6 @@
     border-radius: 0;
 }
 
-.hide{
-    display: none;
-}
-
-.show{
-    display: block;
-}
-
 div.scroll {
     height: 400px;
     overflow-y: scroll;
@@ -32,4 +24,8 @@ div.scroll {
 
 .pointer{
     cursor: pointer;
+}
+
+.link{
+    font-size: 14px;
 }
