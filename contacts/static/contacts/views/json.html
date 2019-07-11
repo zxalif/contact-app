@@ -1,2 +1,2 @@
 <a class="text-center" ui-sref="home">Home</a>
-<pre>{{ dataManager.contacts | json }}<pre>
+<pre>{{ dataManager.contacts | orderBy:'contact_name' | json  }}<pre>

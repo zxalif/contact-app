@@ -1,4 +1,6 @@
 app.filter('byName', function(){
+    /* Filter for shorting an object by its property */
+
     return function(inputs, argument){
         if(inputs == undefined || typeof inputs != 'object'){
             return inputs;

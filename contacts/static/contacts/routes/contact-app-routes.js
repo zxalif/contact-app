@@ -1,4 +1,6 @@
 app.config(function($stateProvider, $urlRouterProvider){
+    /* Router Configuration */
+
     $urlRouterProvider.otherwise('/home');
 
     $stateProvider

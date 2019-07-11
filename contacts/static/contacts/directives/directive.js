@@ -1,4 +1,5 @@
 app.directive("numberOnly", function(){
+    /* Directive for parsing number input */
     return {
         require: 'ngModel',
         link: function (scope, element, attr, ngModelCtrl) {

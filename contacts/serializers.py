@@ -3,6 +3,8 @@ from contacts.models import Contact
 
 
 class ContactSerializer(serializers.ModelSerializer):
+    """Serailizer for Contact Model"""
+
     class Meta:
         model = Contact
         fields = '__all__'
