@@ -21,11 +21,8 @@ app.filter('byName', function(){
         }
 
         if(reverse){
-            let reversed = [];
-            for(var i = sortedArray.length; i > 0; i--){
-                reversed[sortedArray.length-i] = sortedArray[i-1];
-            }
-            return reversed;
+            sortedArray.reverse();
+            return sortedArray;
         }
         return sortedArray;
     };

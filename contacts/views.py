@@ -1,5 +1,6 @@
 from django.views.generic.base import TemplateView
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import (ListCreateAPIView,
+                                     RetrieveUpdateDestroyAPIView)
 from contacts.models import Contact
 from contacts.serializers import ContactSerializer
 
