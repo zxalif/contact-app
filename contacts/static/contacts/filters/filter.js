@@ -1,7 +1,7 @@
 app.filter('byName', function(){
     /* Filter for shorting an object by its property */
 
-    return function(inputs, argument){
+    return function(inputs, argument, reverse=false){
         if(inputs == undefined || typeof inputs != 'object'){
             return inputs;
         }
@@ -18,6 +18,14 @@ app.filter('byName', function(){
             sortedArray[i][argument] = items[item];
             reminder[index] = null;
             i = i + 1;
+        }
+
+        if(reverse){
+            let reversed = [];
+            for(var i = sortedArray.length; i > 0; i--){
+                reversed[sortedArray.length-i] = sortedArray[i-1];
+            }
+            return reversed;
         }
         return sortedArray;
     };

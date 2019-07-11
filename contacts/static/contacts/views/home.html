@@ -51,7 +51,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr ng-repeat="contact in contacts = (dataManager.contacts | byName:'contact_name') | filter:query ">
+                          <tr ng-repeat="contact in contacts = (dataManager.contacts | byName:'contact_name':true) | filter:query ">
                             <td>{{ contact.contact_name }}</td>
                             <td>{{ contact.contact_phone }}</td>
                             <td>{{ contact.contact_email }}</td>
